@@ -1,10 +1,10 @@
-import { Box, Button, Flex, Spacer, Text, Grid, GridItem, Input, InputGroup, InputRightElement, IconButton, useColorModeValue } from "@chakra-ui/react";
+import { Text, Grid, GridItem, Input, InputGroup, InputRightElement, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../common/ColorModeSwitcher";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-const Navbar = () => {
-    const [searchText, setSearchText] = useState("");
+const Navbar = ({ username, onUsernameChange, onSearch }: any) => {
+    const [searchText, setSearchText] = useState(username);
     const inputBg = useColorModeValue("light.contrast", "dark.background");
     const placeholderColor = useColorModeValue("light.gray", "dark.gray");
     const buttonColor = useColorModeValue("light.primary", "dark.primary");
@@ -12,7 +12,9 @@ const Navbar = () => {
     const navBg = useColorModeValue("light.secondary", "dark.secondary");
 
     const handleSearch = () => {
-        console.log(searchText);
+        // console.log('This is the search text: ', searchText);
+        onUsernameChange(searchText);
+        onSearch(searchText);
     };
 
     return (
@@ -39,7 +41,7 @@ const Navbar = () => {
                         _placeholder={{ color: placeholderColor }}
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
-                        onKeyPress={(e) => {
+                        onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 handleSearch();
                             }
