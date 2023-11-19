@@ -9,7 +9,6 @@ interface ApiRepository {
     name: string;
     language: string;
     stargazers_count: number;
-    // Define only the fields you need
 }
 
 interface RepositoryListProps {
