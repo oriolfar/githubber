@@ -1,5 +1,6 @@
 import { Box, Text, VStack, Grid, GridItem, useBreakpointValue, Container } from "@chakra-ui/react";
-import RepoList from "./components/RepoList";
+import RepoList from "../../components/repo/RepoList";
+import UserInfo from "../../components/user/UserInfo";
 
 type HomeProps = {
     username: string;
@@ -19,18 +20,20 @@ const Home = ({ username }: HomeProps) => {
                 boxSizing="border-box"
             >
                 {!isWideScreen && (
-                    <GridItem bg="tomato" borderRadius="md">
-                        <VStack spacing={0}>
-                            <Text>User Profile Info</Text>
-                            {/* Add more user profile info here */}
+                    <GridItem>
+                        <VStack spacing={1}>
+                            <Box textAlign="left">
+                                <UserInfo username={username} />
+                            </Box>
                         </VStack>
                     </GridItem>
                 )}
                 {isWideScreen && (
-                    <GridItem bg="tomato" borderRadius="md" padding={3} height="250px">
+                    <GridItem padding={3} height="250px">
                         <VStack spacing={1}>
-                            <Text>User Profile Info</Text>
-                            {/* Add more user profile info here */}
+                            <Box textAlign="left" backgroundColor="red">
+                                <UserInfo username={username} />
+                            </Box>
                         </VStack>
                     </GridItem>
                 )}
@@ -39,7 +42,6 @@ const Home = ({ username }: HomeProps) => {
                         <Box textAlign="left">
                             <RepoList username={username} />
                         </Box>
-                        {/* Add list of user repositories here */}
                     </VStack>
                 </GridItem>
             </Grid>

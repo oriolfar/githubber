@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import githubService from '../../../services/githubServices';
+import { getRepos, checkUserExists } from '../../services/githubServices';
 import { Box, Spinner, Alert, AlertIcon, VStack, Text, Button, useColorModeValue, Flex } from "@chakra-ui/react";
 import { ChevronUpIcon, StarIcon } from "@chakra-ui/icons";
 
@@ -51,9 +51,9 @@ const RepoList: React.FC<RepositoryListProps> = ({ username }) => {
                 setLoading(true);
                 setError(null);
                 try {
-                    const exists = await githubService.checkUserExists(username);
+                    const exists = await checkUserExists(username);
                     if (exists) {
-                        const repos: ApiRepository[] = await githubService.getRepos(username);
+                        const repos: ApiRepository[] = await getRepos(username);
                         const mappedRepos = repos.map((repo: ApiRepository) => ({
                             id: repo.id,
                             name: repo.name,
