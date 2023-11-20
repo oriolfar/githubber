@@ -6,7 +6,7 @@ export interface ApiRepository {
 }
 
 export interface RepositoryListProps {
-    username: string;
+    repositories: Repository[];
 }
 
 export interface Repository {

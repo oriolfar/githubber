@@ -12,7 +12,7 @@ const theme = extendTheme({
       secondary: "#CE4C79",
       background: "##ffb5cf",
       foreground: "#12043a",
-      contrast: "#C8619C",
+      contrast: "#E87892",
       gray: "#808080",
     },
     dark: {

@@ -27,6 +27,7 @@ const Navbar = ({ username, onUsernameChange, onSearch }: any) => {
             color={textColor}
             templateColumns="25% 50% 25%"
             alignItems="center"
+            shadow="2xl"
         >
             <GridItem display="flex" alignItems="center">
                 <Text fontSize="xl" fontFamily="heading" fontWeight="bold">github-repos</Text>
