@@ -12,7 +12,7 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
 
     return (
         <GridItem padding={3} height={isWideScreen ? "250px" : undefined}>
-            <Box textAlign="left" backgroundColor={bgColor} borderRadius="lg">
+            <Box textAlign="left" backgroundColor={bgColor} borderRadius="lg" boxShadow="2xl">
                 <RepoList username={username} />
             </Box>
         </GridItem>
