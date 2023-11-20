@@ -1,13 +1,24 @@
-import { Box, Text, VStack, Grid, GridItem, useBreakpointValue, Container } from "@chakra-ui/react";
-import RepoList from "../../components/repo/RepoList";
-import UserInfo from "../../components/user/UserInfo";
+import { Grid, useBreakpointValue, Container, Card, CardBody } from "@chakra-ui/react";
+import UserSection from "../../components/user/UserSection";
+import RepoSection from "../../components/repo/RepoSection";
 
 type HomeProps = {
     username: string;
 };
 
-const Home = ({ username }: HomeProps) => {
-    const isWideScreen = useBreakpointValue({ base: false, md: true });
+// Home is the main component that displays the user section and the repository section
+const Home: React.FC<HomeProps> = ({ username }) => {
+    const isWideScreen = useBreakpointValue({ base: false, md: true }) || false;
+
+    if (!username) {
+        return (
+            <Card maxW="md" mx="auto" mt={5}>
+                <CardBody>
+                    Please enter a GitHub username
+                </CardBody>
+            </Card>
+        );
+    }
 
     return (
         <Container maxW="container.xl" padding={8} overflow="hidden">
@@ -19,31 +30,8 @@ const Home = ({ username }: HomeProps) => {
                 gap={5}
                 boxSizing="border-box"
             >
-                {!isWideScreen && (
-                    <GridItem>
-                        <VStack spacing={1}>
-                            <Box textAlign="left">
-                                <UserInfo username={username} />
-                            </Box>
-                        </VStack>
-                    </GridItem>
-                )}
-                {isWideScreen && (
-                    <GridItem padding={3} height="250px">
-                        <VStack spacing={1}>
-                            <Box textAlign="left" backgroundColor="red">
-                                <UserInfo username={username} />
-                            </Box>
-                        </VStack>
-                    </GridItem>
-                )}
-                <GridItem bg="green" borderRadius="md" padding={3}>
-                    <VStack spacing={1}>
-                        <Box textAlign="left">
-                            <RepoList username={username} />
-                        </Box>
-                    </VStack>
-                </GridItem>
+                <UserSection username={username} isWideScreen={isWideScreen} />
+                <RepoSection username={username} isWideScreen={isWideScreen} />
             </Grid>
         </Container >
     );
