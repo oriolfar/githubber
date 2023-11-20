@@ -1,59 +1,35 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getRepos, checkUserExists } from '../../services/githubServices';
-import { Box, Spinner, Alert, AlertIcon, VStack, Text, Button, useColorModeValue, Flex } from "@chakra-ui/react";
-import { ChevronUpIcon, StarIcon } from "@chakra-ui/icons";
+import { Box, Spinner, Alert, AlertIcon, VStack } from "@chakra-ui/react";
+import RepoCard from './RepoCard';
+import ScrollTopButton from '../common/ScrollTopButton';
+import useScrollTop from '../../hooks/useScrollTop';
+import { ApiRepository, RepositoryListProps, Repository } from './types';
 
-
-interface ApiRepository {
-    id: number;
-    name: string;
-    language: string;
-    stargazers_count: number;
-}
-
-interface RepositoryListProps {
-    username: string;
-}
-
-interface Repository {
-    id: number;
-    name: string;
-    language: string;
-    stars: number;
-}
-
+// RepoList component fetches and displays a list of repositories for a given username
 const RepoList: React.FC<RepositoryListProps> = ({ username }) => {
-
+    // State for storing the fetched repositories
     const [repositories, setRepositories] = useState<Repository[]>([]);
+    // State for tracking loading status
     const [loading, setLoading] = useState(false);
+    // State for storing any error messages
     const [error, setError] = useState<string | null>(null);
-    const [showScroll, setShowScroll] = useState(false);
+    // Custom hook for handling scroll to top functionality
+    const { showScroll, scrollTop } = useScrollTop();
 
-    const checkScrollTop = useCallback(() => {
-        if (!showScroll && window.scrollY > 400) {
-            setShowScroll(true);
-        } else if (showScroll && window.scrollY <= 400) {
-            setShowScroll(false);
-        }
-    }, [showScroll]);
-
-    const scrollTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', checkScrollTop);
-        return () => window.removeEventListener('scroll', checkScrollTop);
-    }, [checkScrollTop]);
+    // Effect hook for fetching repositories when the username changes
     useEffect(() => {
         const fetchRepos = async () => {
             if (username) {
                 setLoading(true);
                 setError(null);
                 try {
+                    // Check if the user exists
                     const exists = await checkUserExists(username);
                     if (exists) {
+                        // Fetch the repositories
                         const repos: ApiRepository[] = await getRepos(username);
+                        // Map the fetched repositories to the Repository interface
                         const mappedRepos = repos.map((repo: ApiRepository) => ({
                             id: repo.id,
                             name: repo.name,
@@ -76,6 +52,7 @@ const RepoList: React.FC<RepositoryListProps> = ({ username }) => {
         fetchRepos();
     }, [username]);
 
+    // Render different UI based on the state
     if (!username) {
         return <Box>Please enter a username to search for repositories</Box>;
     }
@@ -92,27 +69,16 @@ const RepoList: React.FC<RepositoryListProps> = ({ username }) => {
             </Alert>
         );
     }
+
+    // Render the list of repositories
     return (
         <Box>
             <VStack spacing={4} align="stretch">
                 {repositories.map((repo) => (
-                    <Box key={repo.id} p={5} shadow="md" borderWidth="1px">
-                        <Text fontSize="xl">{repo.name}</Text>
-                        <Flex mt={2} alignItems="center" justify="space-between">
-                            <Text flex={1}>{repo.language || 'Not specific language found'}</Text>
-                            <Flex alignItems="center">
-                                <StarIcon color="yellow.500" />
-                                <Text ml={1}>{repo.stars}</Text>
-                            </Flex>
-                        </Flex>
-                    </Box>
+                    <RepoCard key={repo.id} repo={repo} />
                 ))}
             </VStack>
-            {showScroll &&
-                <Button onClick={scrollTop} position="fixed" bottom="5vh" right="5vh" colorScheme="teal" size="sm" leftIcon={<ChevronUpIcon />}>
-                    Scroll Up
-                </Button>
-            }
+            <ScrollTopButton showScroll={showScroll} scrollTop={scrollTop} />
         </Box>
     );
 };
