@@ -12,6 +12,8 @@ interface RepoSectionProps {
 // RepoSection is a component that displays the repository list
 const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => {
     const bgColor = useColorModeValue("light.primary", "dark.primary");
+    const placeholderColor = useColorModeValue("light.contrast", "dark.background");
+    const textColor = useColorModeValue("light.secondary", "dark.secondary");
 
     const [filter, setFilter] = useState<string>("");
     const [selectedLanguage, setSelectedLanguage] = useState<string>("Any");
@@ -39,11 +41,13 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
                     placeholder="Search repositories"
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
+                    _placeholder={{ color: placeholderColor }}
+                    color={textColor}
                 />
             </GridItem>
             <GridItem textAlign="left" borderRadius="lg" boxShadow="2xl" marginBottom={4}>
-                <Text>Coding Language</Text>
-                <Select backgroundColor={bgColor} value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
+                <Text paddingBottom="1" fontSize="sm">Coding Language</Text>
+                <Select backgroundColor={bgColor} color={textColor} value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
                     {languages.map((language) => (
                         <option key={language} value={language}>
                             {language}

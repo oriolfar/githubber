@@ -1,14 +1,12 @@
+// UserInfo.tsx
 import { Card, CardBody, Text } from "@chakra-ui/react";
-import { User } from "./types";
+import { UserCardProps } from "./types";
 
-interface UserCardProps {
-    user: User;
-}
-
-// UserCard is a component that displays the user details
+// UserInfo component
 const UserInfo: React.FC<UserCardProps> = ({ user }) => (
     <Card>
         <CardBody>
+            {/* Display user details */}
             <Text fontSize="xl">Name: {user.name}</Text>
             <Text fontSize="xl">Location: {user.location}</Text>
             <Text fontSize="xl">Bio: {user.bio}</Text>

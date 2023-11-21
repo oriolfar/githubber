@@ -28,8 +28,10 @@ export const getUserInfo = async (username: string) => {
     } catch (error) {
         const githubError = error as GithubError;
         if (githubError.response && githubError.response.status === 404) {
+            console.error('User not found'); // Log the error
             return null;
         } else {
+            console.error('An error occurred while fetching the user'); // Log the error
             throw error;
         }
     }

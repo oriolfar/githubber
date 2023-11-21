@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { IconButton, useColorModeValue } from "@chakra-ui/react";
 import { ChevronUpIcon } from "@chakra-ui/icons";
 
 // ScrollTopButtonProps defines the props for the ScrollTopButton component
@@ -9,11 +9,28 @@ interface ScrollTopButtonProps {
 
 // ScrollTopButton is a button that scrolls the page to the top when clicked
 // It is only visible when the showScroll prop is true
-const ScrollTopButton: React.FC<ScrollTopButtonProps> = ({ showScroll, scrollTop }) => (
-    showScroll ?
-        <Button onClick={scrollTop} position="fixed" bottom="5vh" right="5vh" colorScheme="teal" size="sm" leftIcon={<ChevronUpIcon />}>
-            Scroll Up
-        </Button> : null
-);
+const ScrollTopButton: React.FC<ScrollTopButtonProps> = ({ showScroll, scrollTop }) => {
+    const bgColor = useColorModeValue("light.primary", "dark.primary");
+    const color = useColorModeValue("light.secondary", "dark.secondary");
+    const borderColor = useColorModeValue("light.secondary", "dark.secondary");
+
+    return (
+        showScroll ?
+            <IconButton
+                onClick={scrollTop}
+                position="fixed"
+                bottom="5vh"
+                right="5vh"
+                bgColor={bgColor}
+                color={color}
+                borderColor={borderColor}
+                borderWidth={5}
+                size="lg"
+                icon={<ChevronUpIcon />}
+                isRound
+                aria-label="Scroll Up"
+            /> : null
+    );
+};
 
 export default ScrollTopButton;

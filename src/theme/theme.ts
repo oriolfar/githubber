@@ -8,20 +8,20 @@ const config : ThemeConfig = {
 const theme = extendTheme({
   colors: {
     light: {
-      primary: "#444F80",
-      secondary: "#CE4C79",
-      background: "##ffb5cf",
-      foreground: "#12043a",
-      contrast: "#E87892",
-      gray: "#808080",
+      primary: "#2C859B",
+      secondary: "#FF8C42",
+      background: "#F0F9FF",
+      foreground: "#263959",
+      contrast: "#ffb687",
+      gray: "#0f1929",
     },
     dark: {
-      primary: "#C8619C",
-      secondary: "#1A0655",
-      background: "#12043a",
-      foreground: "#444F80",
-      contrast: "#CE4C79",
-      gray: "#808080",
+      primary: "#FF8C42",
+      secondary: "#0f1929",
+      background: "#263959",
+      foreground: "#FF8C42",
+      contrast: "#FF8C42",
+      gray: "#F0F9FF",
     },
   },
   fonts: {
