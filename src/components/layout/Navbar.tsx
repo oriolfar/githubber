@@ -1,10 +1,10 @@
 import { Text, Grid, GridItem, Input, InputGroup, InputRightElement, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../common/ColorModeSwitcher";
-import { SearchIcon } from "@chakra-ui/icons";
+import SearchInput from "./SearchInput";
 import { useState } from "react";
 
-const Navbar = ({ username, onUsernameChange, onSearch }: any) => {
-    const [searchText, setSearchText] = useState(username);
+const Navbar = ({ onSearch }: any) => {
+    const [searchText, setSearchText] = useState("");
     const inputBg = useColorModeValue("light.contrast", "dark.background");
     const placeholderColor = useColorModeValue("light.gray", "dark.gray");
     const buttonColor = useColorModeValue("light.primary", "dark.primary");
@@ -12,8 +12,6 @@ const Navbar = ({ username, onUsernameChange, onSearch }: any) => {
     const navBg = useColorModeValue("light.secondary", "dark.secondary");
 
     const handleSearch = () => {
-        // console.log('This is the search text: ', searchText);
-        onUsernameChange(searchText);
         onSearch(searchText);
     };
 
@@ -33,30 +31,15 @@ const Navbar = ({ username, onUsernameChange, onSearch }: any) => {
                 <Text fontSize="xl" fontFamily="heading" fontWeight="bold">github-repos</Text>
             </GridItem>
             <GridItem display="flex" justifyContent="center" alignItems="center">
-                <InputGroup>
-                    <Input
-                        variant={"filled" as any}
-                        placeholder="Type a username"
-                        bg={inputBg}
-                        borderColor="transparent"
-                        _placeholder={{ color: placeholderColor }}
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSearch();
-                            }
-                        }}
-                        _focus={{ borderColor: buttonColor }}
-                    />
-                    <InputRightElement>
-                        <IconButton
-                            aria-label="Search"
-                            icon={<SearchIcon />}
-                            onClick={handleSearch}
-                            colorScheme={buttonColor} />
-                    </InputRightElement>
-                </InputGroup>
+                {/* Use the SearchInput component */}
+                <SearchInput
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                    handleSearch={handleSearch}
+                    inputBg={inputBg}
+                    placeholderColor={placeholderColor}
+                    buttonColor={buttonColor}
+                />
             </GridItem>
             <GridItem display="flex" justifyContent="flex-end" alignItems="center">
                 <ColorModeSwitcher />

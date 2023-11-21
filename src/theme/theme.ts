@@ -10,7 +10,7 @@ const theme = extendTheme({
     light: {
       primary: "#444F80",
       secondary: "#CE4C79",
-      background: "##ffb5cf",
+      background: "#ffb5cf",
       foreground: "#12043a",
       contrast: "#E87892",
       gray: "#808080",
