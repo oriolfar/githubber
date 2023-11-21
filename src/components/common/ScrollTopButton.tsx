@@ -11,16 +11,13 @@ interface ScrollTopButtonProps {
 // It is only visible when the showScroll prop is true
 const ScrollTopButton: React.FC<ScrollTopButtonProps> = ({ showScroll, scrollTop }) => {
     const bgColor = useColorModeValue("light.primary", "dark.primary");
-<<<<<<< HEAD
     const color = useColorModeValue("light.secondary", "dark.secondary");
-=======
-    const color = useColorModeValue("light.foreground", "dark.foreground");
->>>>>>> 6c1e9099b3971c6da8319114023078658a2a9058
     const borderColor = useColorModeValue("light.secondary", "dark.secondary");
 
     return (
         showScroll ?
             <IconButton
+                shadow={showScroll ? "lg" : undefined}
                 onClick={scrollTop}
                 position="fixed"
                 bottom="5vh"

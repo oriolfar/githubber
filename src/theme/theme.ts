@@ -8,21 +8,12 @@ const config : ThemeConfig = {
 const theme = extendTheme({
   colors: {
     light: {
-<<<<<<< HEAD
       primary: "#2C859B",
       secondary: "#FF8C42",
       background: "#F0F9FF",
       foreground: "#263959",
       contrast: "#ffb687",
       gray: "#0f1929",
-=======
-      primary: "#444F80",
-      secondary: "#CE4C79",
-      background: "#ffb5cf",
-      foreground: "#12043a",
-      contrast: "#E87892",
-      gray: "#808080",
->>>>>>> 6c1e9099b3971c6da8319114023078658a2a9058
     },
     dark: {
       primary: "#FF8C42",
