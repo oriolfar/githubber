@@ -11,6 +11,7 @@ interface RepoSectionProps {
 
 // RepoSection is a component that displays the repository list
 const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => {
+    console.log(`RepoSection: username=${username}`);
     const bgColor = useColorModeValue("light.primary", "dark.primary");
     const placeholderColor = useColorModeValue("light.contrast", "dark.background");
     const textColor = useColorModeValue("light.secondary", "dark.secondary");

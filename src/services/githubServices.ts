@@ -1,23 +1,52 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const GITHUB_API_URL = 'https://api.github.com';
 
-interface GithubError extends Error {
-    response?: {
-        status: number;
-    };
-}
-
-export const getRepos = async (username: string) => {
-    const response = await axios.get(`${GITHUB_API_URL}/users/${username}/repos`, {
+export const checkUserExists = async (username: string) => {
+    try {
+        await axios.get(`${GITHUB_API_URL}/users/${username}`, {
         headers: {
             Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
         }
     });
-    return response.data;
+        return true;
+    } catch (error) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response && axiosError.response.status === 404) {
+            return false;
+        } else {
+            throw error;
+        }
+    }
+};
+
+export const getRepos = async (username: string) => {
+    const userExists = await checkUserExists(username);
+    if (!userExists) {
+        console.error('User not found'); // Log the error
+        return null;
+    }
+
+    try {
+        const response = await axios.get(`${GITHUB_API_URL}/users/${username}/repos`, {
+            headers: {
+                Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('An error occurred while fetching the repos'); // Log the error
+        throw error;
+    }
 };
 
 export const getUserInfo = async (username: string) => {
+    const userExists = await checkUserExists(username);
+    if (!userExists) {
+        console.error('User not found'); // Log the error
+        return null;
+    }
+
     try {
         const response = await axios.get(`${GITHUB_API_URL}/users/${username}`, {
             headers: {
@@ -26,18 +55,7 @@ export const getUserInfo = async (username: string) => {
         });
         return response.data;
     } catch (error) {
-        const githubError = error as GithubError;
-        if (githubError.response && githubError.response.status === 404) {
-            console.error('User not found'); // Log the error
-            return null;
-        } else {
-            console.error('An error occurred while fetching the user'); // Log the error
-            throw error;
-        }
+        console.error('An error occurred while fetching the user'); // Log the error
+        throw error;
     }
-};
-
-export const checkUserExists = async (username: string) => {
-    const UserInfo = await getUserInfo(username);
-    return UserInfo !== null;
 };

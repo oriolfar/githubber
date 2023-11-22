@@ -1,38 +1,20 @@
 // Import necessary dependencies
-import { useState, useEffect } from 'react';
 import { Grid, useBreakpointValue, Container, Card, CardBody, Box } from "@chakra-ui/react";
 import UserSection from "../../components/user/UserSection";
 import RepoSection from "../../components/repo/RepoSection";
-import { checkUserExists } from '../../services/githubServices';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 // Define the props for the Home component
 type HomeProps = {
     username: string;
+    userExists: boolean;
+    loading: boolean;
 };
 
 // Home is the main component that displays the user section and the repository section
-const Home: React.FC<HomeProps> = ({ username }) => {
-    // Define state variables for user existence and loading status
-    const [userExists, setUserExists] = useState(false);
-    const [loading, setLoading] = useState(false);
-
+const Home: React.FC<HomeProps> = ({ username, userExists, loading }) => {
     // Define a breakpoint for wide screens
     const isWideScreen = useBreakpointValue({ base: false, md: true }) || false;
-
-    // Use an effect to fetch user data when the username changes
-    useEffect(() => {
-        const fetchUser = async () => {
-            setLoading(true);
-            const exists = await checkUserExists(username);
-            setUserExists(exists);
-            setLoading(false);
-        };
-
-        if (username) {
-            fetchUser();
-        }
-    }, [username]);
 
     // Render different components based on the state
     return (
@@ -46,7 +28,7 @@ const Home: React.FC<HomeProps> = ({ username }) => {
                 </CardBody>
             </Card>
         ) :
-            // If the data is loading, display a loading spinner
+            // If the username is provided and the user is loading, display a loading message
             loading ? (
                 <Card maxW="md" mx="auto" mt={5} bg="transparent" border="none" boxShadow="none">
                     <Box display="flex" alignItems="center" justifyContent="center">
@@ -64,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ username }) => {
                         </CardBody>
                     </Card>
                 ) :
-                    // If the user exists and the data is loaded, display the user section and the repository section
+                    // If the user exists, display the user section and the repository section
                     (
                         <Container maxW="container.xl" padding={8} overflow="hidden">
                             <Grid
