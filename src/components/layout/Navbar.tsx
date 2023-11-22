@@ -1,21 +1,22 @@
-import { Text, Grid, GridItem, Input, InputGroup, InputRightElement, IconButton, useColorModeValue } from "@chakra-ui/react";
+// Import necessary components and hooks from Chakra UI
+import { Text, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+
+// Import custom components
 import { ColorModeSwitcher } from "../common/ColorModeSwitcher";
 import SearchInput from "./SearchInput";
-import { useState } from "react";
+import Logo from "./Logo";
 
-const Navbar = ({ onSearch }: any) => {
-    const [searchText, setSearchText] = useState("");
-    const inputBg = useColorModeValue("light.contrast", "dark.background");
-    const placeholderColor = useColorModeValue("light.gray", "dark.gray");
-    const buttonColor = useColorModeValue("light.primary", "dark.primary");
+// Import types
+import { NavbarProps } from './types';
+
+// Navbar component
+const Navbar = ({ onSearch }: NavbarProps) => {
+    // Use color mode values for text and background colors
     const textColor = useColorModeValue("light.primary", "dark.primary");
     const navBg = useColorModeValue("light.secondary", "dark.secondary");
 
-    const handleSearch = () => {
-        onSearch(searchText);
-    };
-
     return (
+        // Grid container for Navbar
         <Grid
             position="sticky"
             top={0}
@@ -27,20 +28,17 @@ const Navbar = ({ onSearch }: any) => {
             alignItems="center"
             shadow="2xl"
         >
+            {/* Logo section */}
             <GridItem display="flex" alignItems="center">
-                <Text fontSize="xl" fontFamily="heading" fontWeight="bold">github-repos</Text>
+                <Logo />
             </GridItem>
+
+            {/* Search input section */}
             <GridItem display="flex" justifyContent="center" alignItems="center">
-                {/* Use the SearchInput component */}
-                <SearchInput
-                    searchText={searchText}
-                    setSearchText={setSearchText}
-                    handleSearch={handleSearch}
-                    inputBg={inputBg}
-                    placeholderColor={placeholderColor}
-                    buttonColor={buttonColor}
-                />
+                <SearchInput onSearch={onSearch} />
             </GridItem>
+
+            {/* Color mode switcher section */}
             <GridItem display="flex" justifyContent="flex-end" alignItems="center">
                 <ColorModeSwitcher />
             </GridItem>

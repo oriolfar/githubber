@@ -1,14 +1,18 @@
+// Import necessary dependencies
 import { extendTheme, ThemeConfig } from "@chakra-ui/react"
 
+// Define the initial color mode and system color mode
 const config : ThemeConfig = {
   initialColorMode: "light",
   useSystemColorMode: false,
 }
 
+// Extend the default theme
 const theme = extendTheme({
+  // Define the colors for light and dark modes
   colors: {
     light: {
-      primary: "#2C859B",
+      primary: "#385380",
       secondary: "#FF8C42",
       background: "#F0F9FF",
       foreground: "#263959",
@@ -24,10 +28,12 @@ const theme = extendTheme({
       gray: "#F0F9FF",
     },
   },
+  // Define the fonts for heading and body text
   fonts: {
     heading: "Arial, sans-serif",
     body: "Arial, sans-serif",
   },
+  // Define the base style for buttons
   components: {
     Button: {
       baseStyle: {
@@ -40,7 +46,9 @@ const theme = extendTheme({
       },
     },
   },
+  // Apply the color mode configuration
   config,
+  // Define global styles
   styles: {
     global: (props: { colorMode: string }) => ({
       body: {
@@ -51,4 +59,4 @@ const theme = extendTheme({
   },
 })
 
-export default theme
+export default theme;

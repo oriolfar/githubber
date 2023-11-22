@@ -10,6 +10,7 @@ import UserHeader from "./UserHeader";
 // UserGrid component
 const UserGrid: React.FC<UserInfoProps> = ({ username }) => {
     // Fetch user data and determine color mode
+    console.log("UserGrid.tsx: username: ", username);
     const { user, loading } = useFetchUser(username);
     const linkColor = useColorModeValue("light.secondary", "dark.secondary");
 
