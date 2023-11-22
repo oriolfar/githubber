@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Home from './pages/home/Home';
-import { useGithubUser } from './hooks/useGithubUser';
+import Navbar from '../components/layout/Navbar';
+import Home from '../pages/home/Home';
+import { useGithubUser } from '../hooks/useGithubUser';
 import { Text } from '@chakra-ui/react';
 
 const AppRouter = () => {
