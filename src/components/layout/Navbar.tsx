@@ -23,8 +23,8 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
     if (!isSmallScreen) {
         console.log("large screen")
+        // Grid container for Navbar large devices
         return (
-
             <Grid
                 position="sticky"
                 top={0}
@@ -46,7 +46,6 @@ const Navbar = ({ onSearch }: NavbarProps) => {
                 >
                     <Logo />
                 </GridItem>
-
                 <GridItem
                     colSpan={1}
                     rowSpan={3}
@@ -56,7 +55,6 @@ const Navbar = ({ onSearch }: NavbarProps) => {
                 >
                     <SearchInput onSearch={onSearch} />
                 </GridItem>
-
                 <GridItem
                     colSpan={1}
                     rowSpan={1}
@@ -70,8 +68,8 @@ const Navbar = ({ onSearch }: NavbarProps) => {
         );
     } else {
         console.log("small screen")
+        // Grid container for Navbar small devices
         return (
-            // Grid container for Navbar
             <Grid
                 templateColumns={gridTemplateColumns}
                 templateRows={gridTemplateRows}
@@ -85,21 +83,34 @@ const Navbar = ({ onSearch }: NavbarProps) => {
                 shadow="2xl"
                 width="100%"
             >
-                {/* Section 1 */}
-                < GridItem colSpan={6} display="flex" rowSpan={1} justifyContent="flex-start" alignItems="center">
+                <GridItem
+                    colSpan={6}
+                    display="flex"
+                    rowSpan={1}
+                    justifyContent="flex-start"
+                    alignItems="center"
+                >
                     <Logo />
                 </GridItem>
-
-                {/* Section 2 */}
-                <GridItem colSpan={2} rowSpan={1} display="flex" justifyContent="flex-end" alignItems="center">
+                <GridItem
+                    colSpan={2}
+                    rowSpan={1}
+                    display="flex"
+                    justifyContent="flex-end"
+                    alignItems="center"
+                >
                     <ColorModeSwitcher />
                 </GridItem>
-
-                {/* Section 3 */}
-                <GridItem colSpan={8} rowSpan={1} display="flex" justifyContent="center" alignItems="center">
+                <GridItem
+                    colSpan={8}
+                    rowSpan={1}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                >
                     <SearchInput onSearch={onSearch} />
                 </GridItem>
-            </Grid >
+            </Grid>
         )
     };
 };
