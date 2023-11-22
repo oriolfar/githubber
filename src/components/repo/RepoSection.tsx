@@ -1,61 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, GridItem, Input, Select, useColorModeValue, Text } from "@chakra-ui/react";
+// RepoSection.tsx
+import React, { useState } from 'react';
+import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import RepoList from "../../components/repo/RepoList";
-import { getRepos } from '../../services/githubServices';
-import { Repository } from '../../components/repo/types';
+import SearchRepoName from './SearchRepoName';
+import LanguageSelect from './LanguageSelect';
+import useRepositories from '../../hooks/useRepositories';
+import { RepoSectionProps } from './types';
 
-interface RepoSectionProps {
-    username: string;
-    isWideScreen: boolean;
-}
-
-// RepoSection is a component that displays the repository list
+// RepoSection component displays a list of repositories for a given username
+// It allows filtering repositories by name and language
 const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => {
-    console.log(`RepoSection: username=${username}`);
+    // Use Chakra UI's useColorModeValue to support light/dark mode
     const bgColor = useColorModeValue("light.primary", "dark.primary");
-    const placeholderColor = useColorModeValue("light.contrast", "dark.background");
-    const textColor = useColorModeValue("light.secondary", "dark.secondary");
 
+    // State for the repository name filter and selected language
     const [filter, setFilter] = useState<string>("");
     const [selectedLanguage, setSelectedLanguage] = useState<string>("Any");
-    const [repositories, setRepositories] = useState<Repository[]>([]);
 
-    useEffect(() => {
-        if (username) {
-            getRepos(username).then((repos) => {
-                setRepositories(repos);
-            });
-        }
-    }, [username]);
-
-    const filteredRepos = repositories.filter(repo =>
-        repo.name.toLowerCase().includes(filter.toLowerCase()) &&
-        (selectedLanguage === "Any" || repo.language === selectedLanguage)
-    );
-
-    const languages = ["Any", ...Array.from(new Set(repositories.map((repo) => repo.language).filter(Boolean)))];
+    // Use custom hook to fetch and filter repositories
+    const { filteredRepos, languages } = useRepositories(username, filter, selectedLanguage);
 
     return (
         <Grid padding={3} templateRows="auto auto 1fr">
+            {/* Search bar to filter repositories by name */}
             <GridItem textAlign="left" backgroundColor={bgColor} borderRadius="lg" boxShadow="2xl" marginBottom={4}>
-                <Input
-                    placeholder="Search repositories"
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
-                    _placeholder={{ color: placeholderColor }}
-                    color={textColor}
-                />
+                <SearchRepoName filter={filter} setFilter={setFilter} />
             </GridItem>
+
+            {/* Dropdown to select a language to filter repositories */}
             <GridItem textAlign="left" borderRadius="lg" boxShadow="2xl" marginBottom={4}>
-                <Text paddingBottom="1" fontSize="sm">Coding Language</Text>
-                <Select backgroundColor={bgColor} color={textColor} value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
-                    {languages.map((language) => (
-                        <option key={language} value={language}>
-                            {language}
-                        </option>
-                    ))}
-                </Select>
+                <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} languages={languages} />
             </GridItem>
+
+            {/* List of filtered repositories */}
+            {/* TODO: Make it responsive in length */}
             <GridItem textAlign="left" backgroundColor={bgColor} borderRadius="lg" boxShadow="2xl">
                 <RepoList repositories={filteredRepos} />
             </GridItem>
