@@ -26,6 +26,7 @@ export interface UserDisplayProps {
 export interface UserAvatarProps {
     src: string;
     alt: string;
+    size: string;
 }
 
 // Component props
@@ -37,6 +38,7 @@ export interface UserInfoProps {
 export interface UserHeaderProps {
     login: string;
     linkColor: string;
+    fontSize: string;
 }
 
 // Define the props types for UserCard component
