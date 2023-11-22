@@ -20,6 +20,8 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
     // Use custom hook to fetch and filter repositories
     const { filteredRepos, languages } = useRepositories(username, filter, selectedLanguage);
 
+    console.log("RepoSection.tsx: RepoSection: filteredRepos: ", filteredRepos);
+
     return (
         <Grid padding={3} templateRows="auto auto 1fr">
             {/* Search bar to filter repositories by name */}
@@ -34,7 +36,7 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
 
             {/* List of filtered repositories */}
             {/* TODO: Make it responsive in length */}
-            <GridItem textAlign="left" backgroundColor="green" borderRadius="lg" boxShadow="2xl">
+            <GridItem textAlign="left" background={bgColor} borderRadius="lg" boxShadow="2xl">
                 <RepoList repositories={filteredRepos} />
             </GridItem>
         </Grid>

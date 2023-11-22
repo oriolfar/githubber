@@ -2,14 +2,20 @@
 import { useEffect, useState } from 'react';
 import { getRepos } from '../services/githubServices';
 import { Repository } from '../components/repo/types';
+import { ApiRepos } from './types';
 
 const useRepositories = (username: string, filter: string, selectedLanguage: string) => {
     const [repositories, setRepositories] = useState<Repository[]>([]);
 
     useEffect(() => {
         if (username) {
-            getRepos(username).then((repos) => {
-                setRepositories(repos);
+            getRepos(username).then((repos: ApiRepos[]) => {
+                const newRepos = repos.map(repo => ({
+                    ...repo,
+                    language: repo.language || "Unknown",
+                    stars: repo.stargazers_count,
+                }));
+                setRepositories(newRepos);
             });
         }
     }, [username]);

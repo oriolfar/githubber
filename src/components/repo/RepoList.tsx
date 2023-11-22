@@ -13,6 +13,8 @@ const RepoList: React.FC<RepositoryListProps> = ({ repositories }) => {
     // scrollTop is a function that scrolls the page to the top when called
     const { showScroll, scrollTop } = useScrollTop();
 
+    console.log("RepoList.tsx: RepoList: repositories: ", repositories);
+
     // Render the list of repositories
     return (
         <Box padding="10px">

@@ -17,6 +17,7 @@ export interface Repository {
     name: string;
     language: string;
     stars: number; // Number of stars for the repository
+    html_url: string; // URL to the repository
 }
 
 // RepoSectionProps interface represents the props for the RepoSection component
