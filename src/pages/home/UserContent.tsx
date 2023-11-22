@@ -11,7 +11,7 @@ const UserContent: React.FC<UserContentProps> = ({ username, isWideScreen }) => 
         <Grid
             minH="100vh"
             p={0}
-            templateColumns={isWideScreen ? "30% 70%" : "100%"}
+            templateColumns={isWideScreen ? "3fr 7fr" : "10fr"}
             templateRows={isWideScreen ? "auto" : "minmax(120px, auto) 1fr"}
             gap={5}
             boxSizing="border-box"
