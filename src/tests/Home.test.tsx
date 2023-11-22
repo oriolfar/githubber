@@ -43,10 +43,4 @@ describe('Home', () => {
         render(<ChakraProvider><Home username="testuser" userExists={false} loading={false} /></ChakraProvider>);
         expect(screen.getByText(/User not found/i)).toBeInTheDocument();
     });
-
-    //todo: fix this test
-    // test('renders UserContent when user exists', () => {
-    //     render(<ChakraProvider><Home username="testuser" userExists={true} loading={false} /></ChakraProvider>);
-    //     expect(screen.getByText(/testuser/i)).toBeInTheDocument();
-    // });
 });

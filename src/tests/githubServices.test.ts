@@ -48,3 +48,22 @@ describe('GitHub Services', () => {
     expect(result).toEqual({ name: 'Test User' });
   });
 });
+
+test('getUserInfo fetches correct user info', async () => {
+  // Call getUserInfo
+  const result = await getUserInfo('oriolfar');
+
+  console.log(`result: ${result}`);
+
+  // Check if the returned data has the correct shape
+  expect(result).toHaveProperty('avatar_url');
+  expect(result).toHaveProperty('login');
+  expect(result).toHaveProperty('name');
+  expect(result).toHaveProperty('location');
+  expect(result).toHaveProperty('bio');
+  expect(result).toHaveProperty('public_repos');
+  expect(result).toHaveProperty('followers');
+  expect(result).toHaveProperty('following');
+  expect(result).toHaveProperty('html_url');
+});
+

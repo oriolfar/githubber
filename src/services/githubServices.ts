@@ -51,13 +51,16 @@ export const getRepos = async (username: string) => {
 
 // This function fetches the information of a GitHub user
 export const getUserInfo = async (username: string) => {
+
+    console.log(`getUserInfo: ${username}`);
     // First, check if the user exists
     const userExists = await checkUserExists(username);
+    console.log(`${GITHUB_API_URL}/users/${username}`);
+    console.log(`userExists: ${userExists}`);
     if (!userExists) {
         console.error('User not found');
         return null;
     }
-
     try {
         // Make a GET request to the GitHub API to fetch the user's information
         const response = await axios.get(`${GITHUB_API_URL}/users/${username}`, {
@@ -65,10 +68,11 @@ export const getUserInfo = async (username: string) => {
                 Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
             }
         });
+        console.log(`response: ${response}`);
         // Return the data from the response
         return response.data;
     } catch (error) {
-        console.error('An error occurred while fetching the user');
+        console.error('An error occurred while fetching the user', error);
         throw error;
     }
 };
