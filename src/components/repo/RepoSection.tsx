@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, GridItem, useColorModeValue, Spinner } from "@chakra-ui/react";
+import { Text, Grid, GridItem, useColorModeValue, Spinner } from "@chakra-ui/react";
 import RepoList from "../../components/repo/RepoList";
 import SearchRepoName from './SearchRepoName';
 import LanguageSelect from './LanguageSelect';
@@ -36,8 +36,13 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
 
             {/* List of filtered repositories */}
             <GridItem textAlign="left" minH="0" overflow="auto">
-                {/* If loading, display a spinner, otherwise display the list of repositories */}
-                {loading ? <Spinner /> : <RepoList repositories={filteredRepos} bgColor={bgColor} />}
+                {
+                    loading
+                        ? <Spinner />
+                        : filteredRepos.length > 0
+                            ? <RepoList repositories={filteredRepos} bgColor={bgColor} />
+                            : <Text>No repositories to show</Text>
+                }
             </GridItem>
         </Grid >
     );
