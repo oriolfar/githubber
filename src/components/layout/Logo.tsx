@@ -4,8 +4,7 @@ import { Text } from "@chakra-ui/react";
 // Logo component
 const Logo: React.FC = () => {
     return (
-        // TODO: Implement logo component
-        <Text fontSize="xl" fontFamily="heading" fontWeight="bold">github-repos</Text>
+        <Text fontSize="xl" fontFamily="heading" fontWeight="bold">GITHUBBER</Text>
     );
 };
 

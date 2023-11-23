@@ -1,6 +1,5 @@
-// RepoSection.tsx
 import React, { useState } from 'react';
-import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { Grid, GridItem, useColorModeValue, Spinner } from "@chakra-ui/react";
 import RepoList from "../../components/repo/RepoList";
 import SearchRepoName from './SearchRepoName';
 import LanguageSelect from './LanguageSelect';
@@ -18,7 +17,8 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
     const [selectedLanguage, setSelectedLanguage] = useState<string>("Any");
 
     // Use custom hook to fetch and filter repositories
-    const { filteredRepos, languages } = useRepositories(username, filter, selectedLanguage);
+    // Now also returns a loading state
+    const { filteredRepos, languages, loading } = useRepositories(username, filter, selectedLanguage);
 
     console.log("RepoSection.tsx: RepoSection: filteredRepos: ", filteredRepos);
 
@@ -35,9 +35,9 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
             </GridItem>
 
             {/* List of filtered repositories */}
-            {/* TODO: Make it responsive in length */}
             <GridItem textAlign="left" minH="0" overflow="auto">
-                <RepoList repositories={filteredRepos} bgColor={bgColor} />
+                {/* If loading, display a spinner, otherwise display the list of repositories */}
+                {loading ? <Spinner /> : <RepoList repositories={filteredRepos} bgColor={bgColor} />}
             </GridItem>
         </Grid >
     );
