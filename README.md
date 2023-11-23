@@ -7,9 +7,15 @@ It's built using React, TypeScript, and Chakra UI components. Below is an outlin
 ## Features
 
 - **Responsive Interface:** The application is responsive across various devices to provide a seamless user experience.
+  ![Main desktop initial page](./screenshots/desktop_light_init.png)
+  ![Main mobile user found page](./screenshots/mobile_dark_user.png)
 - **User Search:** Allows users to input a GitHub username to display repositories associated with that user.
+![Loading user input desktop](./screenshots/desktop_dark_user_loading.png)
+![Main desktop user found page](./screenshots/desktop_dark_user.png)
 - **Filtering Repositories:** Users can filter repositories by name and programming language.
-- **Light/Dark Mode:** Implemented a light/dark mode switcher for improved user experience based on their preference.
+![Filtering desktop coding language](./screenshots/desktop_select_language_light.png)
+![Filtering mobile repo name](./screenshots/mobile_light_name_filtered.png)
+- **Light/Dark Mode:** Implemented a light/dark mode switcher for improved user experience based on their preference. As seen on the previous screenshots
 
 
 ## Project Structure
