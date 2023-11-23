@@ -9,6 +9,7 @@ export interface ApiRepository {
 // RepositoryListProps interface represents the props for a component that displays a list of repositories
 export interface RepositoryListProps {
     repositories: Repository[]; // Array of repositories to be displayed
+    bgColor: string; // Background color for the section
 }
 
 // Repository interface represents the structure of a repository object in the application
@@ -23,7 +24,7 @@ export interface Repository {
 // RepoSectionProps interface represents the props for the RepoSection component
 export interface RepoSectionProps {
     username: string; // GitHub username whose repositories are to be displayed
-    isWideScreen: boolean; // Boolean indicating if the screen is wide
+    isWideScreen: boolean; // Whether the screen is wide or not
 }
 
 // RepoCardProps interface represents the props for a component that displays a single repository

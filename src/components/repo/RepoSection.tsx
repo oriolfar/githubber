@@ -36,10 +36,10 @@ const RepoSection: React.FC<RepoSectionProps> = ({ username, isWideScreen }) => 
 
             {/* List of filtered repositories */}
             {/* TODO: Make it responsive in length */}
-            <GridItem textAlign="left" background={bgColor} borderRadius="lg" boxShadow="2xl">
-                <RepoList repositories={filteredRepos} />
+            <GridItem textAlign="left" minH="0" overflow="auto">
+                <RepoList repositories={filteredRepos} bgColor={bgColor} />
             </GridItem>
-        </Grid>
+        </Grid >
     );
 };
 

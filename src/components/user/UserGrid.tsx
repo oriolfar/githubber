@@ -13,7 +13,9 @@ const UserGrid: React.FC<UserInfoProps> = ({ username }) => {
     // Determine color mode
     const linkColor = useColorModeValue("light.secondary", "dark.secondary");
     // Check if the screen size is small
-    const [isSmallScreen] = useMediaQuery("(max-width: 600px)");
+    const [isSmallScreen] = useMediaQuery("(max-width: 820px)");
+
+    console.log("UserGrid.tsx: isSmallScreen: ", isSmallScreen);
 
     // Loading state
     if (loading) {
