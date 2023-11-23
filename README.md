@@ -1,4 +1,4 @@
-# GitHub Repositories Finder App
+# GitHubber App (finding github user repos)
 
 This application is designed to allow users to search for GitHub users and display their repositories. 
 It's built using React, TypeScript, and Chakra UI components. Below is an outline of the project main features and structure.
