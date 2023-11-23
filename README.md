@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# GitHub Repositories Finder App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application is designed to allow users to search for GitHub users and display their repositories. 
+It's built using React, TypeScript, and Chakra UI components. Below is an outline of the project main features and structure.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Responsive Interface:** The application is responsive across various devices to provide a seamless user experience.
+- **User Search:** Allows users to input a GitHub username to display repositories associated with that user.
+- **Filtering Repositories:** Users can filter repositories by name and programming language.
+- **Light/Dark Mode:** Implemented a light/dark mode switcher for improved user experience based on their preference.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+### `assets`
+Contains any project-related assets like images or icons.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `components`
+- **`common`**: Holds reusable components used across different sections of the app, such as `ColorModeSwitcher`, `LoadingSpinner`, etc.
+- **`layout`**: Contains layout-related components like `Navbar`, `Logo`, `SearchInput`, etc.
+- **`repo`**: Components related to repository display and filtering such as `RepoCard`, `RepoList`, `LanguageSelect`, etc.
+- **`user`**: Components dedicated to user information display like `UserAvatar`, `UserHeader`, `UserGrid`, etc.
 
-### `npm run build`
+### `hooks`
+Contains custom hooks used throughout the application like `useFetchUser`, `useGithubUser`, `useRepositories`, etc.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `pages`
+- **`home`**: Holds components specifically related to the main home page, including `Home`, `LoadingUser`, `PromptUsername`, `UserContent`, `UserNotFound`, etc.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `routes`
+Contains the main routing structure for the app defined in `AppRouter`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `services`
+Holds service-related files, such as `githubServices.ts`, which interacts with the GitHub API.
 
-### `npm run eject`
+### `tests`
+Includes various test files to ensure the functionality of components and services, such as `App.test.tsx`, `Home.test.tsx`, `githubServices.test.ts`, etc.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Other Files
+- `App.tsx`: Main component rendering the application.
+- `index.tsx`: Entry point of the application.
+- `react-app-env.d.ts`, `reportWebVitals.ts`, `serviceWorker.ts`, `setupTests.ts`: Configuration and setup files for the React app.
+- `theme`: Contains the Chakra UI theme configuration file.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Clone the repository.
+2. Run `npm install` to install project dependencies.
+3. Start the application using `npm start`.
+4. Access the application in a web browser.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Tests
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application includes various tests to ensure code functionality and robustness. Run tests using `npm test` or `npm test -- --watchAll=false`.
